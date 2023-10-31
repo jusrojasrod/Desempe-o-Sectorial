@@ -1,8 +1,16 @@
 # Desempeño Sectorial
 
-Objetivo
+Goal
 ========
 Ver el comportamiento de los ETFs sectoriales desde el punto de vista:
 
-1. ¿Cuál es el sector económico que más se valoriza? ¿Cuál es el sector económico que más se desvaloriza? 
-2. ¿Cuáles son las compañías que más se valorizan y las compañías que más se desvalorizan al interior de cada ETF?  
+Check ETF's behaviour from two sides:
+
+1. WHat is the most valuated economic sector?
+2. What are the most valuated companies within each econimic sector?
+
+   
+Visualize ETFs returns by sector.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[Pictures/Energia.png](https://github.com/jusrojasrod/Desempe-o-Sectorial/blob/main/Pictures/Energia.png)https://github.com/jusrojasrod/Desempe-o-Sectorial/blob/main/Pictures/Energia.png

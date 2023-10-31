@@ -3,7 +3,6 @@ Desempeño Sectorial
 
 Goal
 ========
-Ver el comportamiento de los ETFs sectoriales desde el punto de vista:
 
 Check ETF's behaviour from two sides:
 

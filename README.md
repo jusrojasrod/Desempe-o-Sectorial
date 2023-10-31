@@ -13,4 +13,4 @@ Check ETF's behaviour from two sides:
 Visualize ETFs returns by sector.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[Pictures/Energia.png](https://github.com/jusrojasrod/Desempe-o-Sectorial/blob/main/Pictures/Energia.png)https://github.com/jusrojasrod/Desempe-o-Sectorial/blob/main/Pictures/Energia.png
+![Pictures/Energia.png](https://github.com/jusrojasrod/Desempe-o-Sectorial/blob/main/Pictures/Energia.png)https://github.com/jusrojasrod/Desempe-o-Sectorial/blob/main/Pictures/Energia.png

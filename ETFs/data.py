@@ -22,7 +22,7 @@ def downloadTicker(ticker, start, end, period='d'):
     """
     """
     cwd = os.getcwd()
-    folderPath_rsrc = '/ETFs/Resources/'
+    folderPath_rsrc = '/Resources/'
     path_results = cwd + folderPath_rsrc
 
     _BASE_URL_ = f'https://eodhd.com/api/eod/{ticker}'

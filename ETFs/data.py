@@ -27,24 +27,6 @@ def downloadData(ticker, start, end, period='d'):
     df.to_pickle(f'{path_results}{ticker}')
 
 
-# ticker = 'tsla'
-# start = '2020-01-05'
-# end = '2020-02-05'
-
-# _BASE_URL_ = f'https://eodhd.com/api/eod/{ticker}'
-
-# payload = {'api_token': config.api_key,
-#            'period': 'd',
-#            'from': start,
-#            'to': end,
-#            'fmt': 'json'}
-
-# r = requests.get(_BASE_URL_, params=payload)
-# data = r.json()
-# df = pd.DataFrame(data)
-
-# print(df)
-
 if __name__ == "__main__":
 
     start = '2023-05-01'
@@ -58,4 +40,6 @@ if __name__ == "__main__":
     cwd = os.getcwd()
     folderPath_rsrc = '/ETFs/Resources/'
     path_results = cwd + folderPath_rsrc
-    pd.read_pickle(f"{path_results}{ticker}")
+    data = pd.read_pickle(f"{path_results}{ticker}")
+
+    print(data)

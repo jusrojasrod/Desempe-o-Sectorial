@@ -21,7 +21,8 @@ def downloadData(ticker, start, end, period='d'):
                'to': end,
                'fmt': 'json'}
 
-    r = requests.get(_BASE_URL_, params=payload)
+    session = requests.Session()
+    r = session.get(_BASE_URL_, params=payload)
     data = r.json()
     df = pd.DataFrame(data)
     df.to_pickle(f'{path_results}{ticker.upper()}')

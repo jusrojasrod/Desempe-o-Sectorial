@@ -18,7 +18,7 @@ def get_session():
     return thread_local.session
 
 
-def downloadTicker(ticker, start, end, period='d'):
+def downloadTicker(ticker, start, end, period='d', filter=None):
     """
     """
     cwd = os.getcwd()
@@ -31,13 +31,14 @@ def downloadTicker(ticker, start, end, period='d'):
                'period': period,
                'from': start,
                'to': end,
-               'fmt': 'json'}
+               'fmt': 'json',
+               'filter': filter}
     session = get_session()
     r = session.get(_BASE_URL_, params=payload)
     data = r.json()
     df = pd.DataFrame(data)
-    df.to_pickle(f'{path_results}{ticker.upper()}')
-    # df.to_excel(f'{path_results}{ticker.upper()}.xlsx')
+    # df.to_pickle(f'{path_results}{ticker.upper()}')
+    df.to_excel(f'{path_results}{ticker.upper()}.xlsx')
     # print(f"{ticker}: {r}")
 
 

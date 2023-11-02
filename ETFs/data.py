@@ -18,7 +18,7 @@ def get_session():
     return thread_local.session
 
 
-def downloadTicker(ticker, start, end, period='d', filter=None):
+def downloadTicker(ticker, start, end, period='d', _filter=None):
     """
     """
     cwd = os.getcwd()
@@ -32,21 +32,23 @@ def downloadTicker(ticker, start, end, period='d', filter=None):
                'from': start,
                'to': end,
                'fmt': 'json',
-               'filter': filter}
+               'filter': _filter}
     session = get_session()
     r = session.get(_BASE_URL_, params=payload)
     data = r.json()
     df = pd.DataFrame(data)
-    # df.to_pickle(f'{path_results}{ticker.upper()}')
-    df.to_excel(f'{path_results}{ticker.upper()}.xlsx')
+    df.to_pickle(f'{path_results}{ticker.upper()}')
+    # df.to_excel(f'{path_results}{ticker.upper()}.xlsx')
     # print(f"{ticker}: {r}")
 
 
-def downloadAllTickers(tickers, start, end):
+def downloadAllTickers(tickers, start, end, period='d', _filter=None):
     """
     """
     with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-        executor.map(partial(downloadTicker, start=start, end=end), tickers)
+        executor.map(partial(downloadTicker, start=start, end=end,
+                             period=period, _filter=_filter),
+                     tickers)
 
 
 if __name__ == "__main__":

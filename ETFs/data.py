@@ -44,6 +44,20 @@ def downloadTicker(ticker, start, end, period='d', _filter=None):
 
 def downloadAllTickers(tickers, start, end, period='d', _filter=None):
     """
+    Parameters
+    ----------
+    tickers: list
+        Contains a list of all tickers required.
+    start: int
+        Start date - the format is 'YYYY-MM-DD'.
+    end: int
+        End date - the format is 'YYYY-MM-DD'.
+    period: int
+        Use 'd' for daily, 'w' for weekly, 'm' for monthly prices.
+        By default, daily prices will be shown.
+    _filter: int
+        Use 'Open', 'High', 'Low', 'Close', 'Adjusted_close', 'Volume'.
+        By default, all columns will be shown.
     """
     with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
         executor.map(partial(downloadTicker, start=start, end=end,

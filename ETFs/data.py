@@ -23,7 +23,7 @@ def downloadTicker(ticker, start, end, period='d', _filter=None):
     """
     cwd = os.getcwd()
     folderPath_rsrc = '/Resources/'
-    path_results = cwd + folderPath_rsrc
+    path_resources = cwd + folderPath_rsrc
 
     _BASE_URL_ = f'https://eodhd.com/api/eod/{ticker}'
 
@@ -37,7 +37,7 @@ def downloadTicker(ticker, start, end, period='d', _filter=None):
     r = session.get(_BASE_URL_, params=payload)
     data = r.json()
     df = pd.DataFrame(data)
-    df.to_pickle(f'{path_results}{ticker.upper()}')
+    df.to_pickle(f'{path_resources}{ticker.upper()}')
     # df.to_excel(f'{path_results}{ticker.upper()}.xlsx')
     # print(f"{ticker}: {r}")
 

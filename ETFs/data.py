@@ -37,6 +37,10 @@ def downloadTicker(ticker, start, end, period='d', _filter=None):
     r = session.get(_BASE_URL_, params=payload)
     data = r.json()
     df = pd.DataFrame(data)
+
+    df = formatData(df)
+
+    # export data
     df.to_pickle(f'{path_resources}{ticker.upper()}')
     # df.to_excel(f'{path_results}{ticker.upper()}.xlsx')
     # print(f"{ticker}: {r}")
@@ -63,6 +67,15 @@ def downloadAllTickers(tickers, start, end, period='d', _filter=None):
         executor.map(partial(downloadTicker, start=start, end=end,
                              period=period, _filter=_filter),
                      tickers)
+
+
+def formatData(df):
+    """
+    """
+    # set index
+    df.set_index('date', inplace=True)
+
+    return df
 
 
 if __name__ == "__main__":

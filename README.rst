@@ -15,3 +15,7 @@ Visualize ETFs returns by sector.
 
 .. image:: https://github.com/jusrojasrod/Desempe-o-Sectorial/blob/main/Pictures/Energy.png?raw=true
    :alt: Energy Sector
+
+To do:
+======
+.. [#]  Add data folder.

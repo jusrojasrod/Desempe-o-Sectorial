@@ -14,13 +14,15 @@
 
 # import libraries
 import pandas as pd
-import numpy as np
 import os
 
 import yfinance as yf
 
 from datetime import date
 from datetime import datetime
+
+import plot
+import tools
 
 
 def run_strategy(sector, column_name='Close'):
@@ -33,12 +35,29 @@ def run_strategy(sector, column_name='Close'):
     else:
         start_ = datetime(end_.year, end_.month - 1, end_.day)
 
-    data = yf.download(sector, start=start_, end=end_, interval="1wk")
+    df = yf.download(sector, start=start_, end=end_, interval="1wk")
 
-    # select colmn_name data
-    data = data[column_name]
+    # select column_name data
+    df = df[column_name]
 
-    return data
+    # Compute returns
+    returns = df.pct_change()
+
+    # current row data
+    last_row, val_max, val_min = tools.currentRow(returns)
+
+    # Select best and worst ETFs
+    selection_ = tools.selection(last_row, n=10)
+
+    # ## Plot
+    # Matrix formation
+    new_names, new_array = plot.matrix_to_plot(selection_)
+
+    # Plot
+    plot.heatmap(values=new_array, labels=new_names,
+                 max_=val_max, min_=val_min, sector=sector)
+
+    return selection_
 
 
 if __name__ == "__main__":
@@ -53,5 +72,5 @@ if __name__ == "__main__":
     ETFs = pd.read_excel(path_rsrc + "ETFs list.xlsx")
 
     for sector in ETFs.columns:
-        print(run_strategy(sector=ETFs[sector].to_list()), column_name='Close')
+        print(run_strategy(sector=ETFs[sector].to_list(), column_name='Close'))
         break

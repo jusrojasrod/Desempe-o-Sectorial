@@ -125,7 +125,7 @@ def plot_bar_sectors(x, y, path, show=True):
 
     ax = sns.barplot(x=x, y=y, color="r")
     ax.bar_label(ax.containers[0], fontsize=8)
-    ax.set_xticklabels( 
+    ax.set_xticklabels(
         labels=x, rotation=90, size=8)
 
     ax.set(xlabel='Sectores', ylabel='Retorno (%)',

@@ -20,12 +20,14 @@ import yfinance as yf
 
 from datetime import date
 from datetime import datetime
+import time
 
 import plot
 import tools
 
 
-def run_strategy(sector, column_name='Close'):
+def run_strategy(sector, tickers, fig_path, column_name='Close',
+                 showFig=False):
     """
     """
     # 1. Download data
@@ -35,7 +37,7 @@ def run_strategy(sector, column_name='Close'):
     else:
         start_ = datetime(end_.year, end_.month - 1, end_.day)
 
-    df = yf.download(sector, start=start_, end=end_, interval="1wk")
+    df = yf.download(tickers, start=start_, end=end_, interval="1wk")
 
     # select column_name data
     df = df[column_name]
@@ -55,22 +57,36 @@ def run_strategy(sector, column_name='Close'):
 
     # Plot
     plot.heatmap(values=new_array, labels=new_names,
-                 max_=val_max, min_=val_min, sector=sector)
+                 max_=val_max, min_=val_min, sector=sector, show=showFig,
+                 path=fig_path)
 
     return selection_
 
 
 if __name__ == "__main__":
 
+    # Start timer
+    start_time = time.time()
+
     # setup
     folderPath_rsrc = '/ETFs/Resources/'
     folderPath_results = '/ETFs/Results/'
+    pictures = '/Pictures/'
     cwd = os.getcwd()
     path_rsrc = cwd + folderPath_rsrc
     path_results = cwd + folderPath_results
+    path_pictures = cwd + pictures
     # read data
     ETFs = pd.read_excel(path_rsrc + "ETFs list.xlsx")
 
+    # execute strategy
     for sector in ETFs.columns:
-        print(run_strategy(sector=ETFs[sector].to_list(), column_name='Close'))
-        break
+        print(f"---> {sector}")
+        print(run_strategy(sector=sector,
+                           tickers=ETFs[sector].dropna().to_list(),
+                           column_name='Close', fig_path=path_pictures))
+        print("="*100)
+
+    # Calculate elapsed time
+    elapsed_time = time.time() - start_time
+    print("Elapsed time: ", elapsed_time)

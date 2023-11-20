@@ -17,6 +17,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
+import seaborn as sns
 
 
 def matrix_to_plot(serie):
@@ -57,7 +58,7 @@ def matrix_to_plot(serie):
     return new_names, new_array
 
 
-def heatmap(values, labels, max_, min_, sector, show=True):
+def heatmap(values, labels, max_, min_, sector, path, show=True):
     """
     Create a heatmap from a numpy array and two lists of labels
 
@@ -99,7 +100,7 @@ def heatmap(values, labels, max_, min_, sector, show=True):
     ax.set_yticks(np.arange(ymax, ymin+1), minor=True)
 
     # Dibujamos la rejilla de color blanco para que actue como separador.
-    ax.grid(which='minor', color='w', linestyle='-', linewidth=2)
+    # ax.grid(which='minor', color='w', linestyle='-', linewidth=2)
     # ax.tick_params(which="minor", bottom=False, left=False)
 
     for i in range(values.shape[0]):
@@ -110,7 +111,24 @@ def heatmap(values, labels, max_, min_, sector, show=True):
 
     ax.set_title(f"{sector}\n")
 
-    plt.savefig(f"{sector}.png")
+    plt.savefig(f"{path}/{sector}.png")
 
     if show is True:
         plt.show()
+
+
+def plot_bar_sectors(x, y):
+    """
+    """
+    # Establecer un tema
+    sns.set_style("darkgrid")
+
+    ax = sns.barplot(x=x, y=y, color="r")
+    ax.bar_label(ax.containers[0], fontsize=8)
+    ax.set_xticklabels( 
+        labels=x, rotation=90, size=8)
+
+    ax.set(xlabel='Sectores', ylabel='Retorno (%)',
+           title='Rendimiento en la última semana de los Sectores')
+
+    plt.show()

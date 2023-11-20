@@ -117,7 +117,7 @@ def heatmap(values, labels, max_, min_, sector, path, show=True):
         plt.show()
 
 
-def plot_bar_sectors(x, y):
+def plot_bar_sectors(x, y, path, show=True):
     """
     """
     # Establecer un tema
@@ -131,4 +131,7 @@ def plot_bar_sectors(x, y):
     ax.set(xlabel='Sectores', ylabel='Retorno (%)',
            title='Rendimiento en la última semana de los Sectores')
 
-    plt.show()
+    plt.savefig(f"{path}/sectors.png")
+
+    if show is True:
+        plt.show()

@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import pandas as pd
+from datetime import datetime, timedelta
 
 
 def currentRow(df):
@@ -73,3 +74,15 @@ def selection(serie, n=10, m_round=2):
         selected = (selected * 100).round(m_round)       # porcentual change
 
     return selected
+
+
+def dates_list(años, start_y, start_m, start_d):
+    """
+    Generates a period of dates.
+    """
+    años = 2
+    semanas = años * 52
+
+    start = datetime(start_y, start_m, start_d)
+
+    return [start + timedelta(days=7*i) for i in range(semanas)]

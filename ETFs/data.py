@@ -20,6 +20,7 @@ import time
 import concurrent.futures
 import threading
 from functools import partial
+from ratelimit import limits, RateLimitException, sleep_and_retry
 
 import config
 import utils
@@ -34,6 +35,12 @@ def get_session():
     return thread_local.session
 
 
+ONE_MINUTE = 60
+MAX_CALLS_PER_MINUTE = 69
+
+
+@sleep_and_retry
+@limits(calls=MAX_CALLS_PER_MINUTE, period=ONE_MINUTE)
 def download(ticker, start, end, period='d', _filter=None,
              folderPath_rsrc='/data/'):
     """
@@ -103,7 +110,7 @@ def downloadAllTickers(tickers, start, end, period='d', _filter=None,
         Group by 'ticker' or 'column' (default)
 
     """
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+    with concurrent.futures.ThreadPoolExecutor() as executor:
         executor.map(partial(handle_data, start=start, end=end,
                              period=period, _filter=_filter),
                      tickers)

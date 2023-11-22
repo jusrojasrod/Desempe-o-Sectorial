@@ -107,8 +107,8 @@ def heatmap(values, labels, max_, min_, sector, path="figure", show=True):
     for i in range(values.shape[0]):
         for j in range(values.shape[1]):
             # print(i, j, values[i,j])
-            text = ax.text(j, i, str(labels[i, j]) + '\n' + str(values[i, j])+'%',
-                           ha="center", va="center", color="k", size=6)
+            ax.text(j, i, str(labels[i, j]) + '\n' + str(values[i, j])+'%',
+                    ha="center", va="center", color="k", size=6)
 
     ax.set_title(f"{sector}\n")
 

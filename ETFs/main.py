@@ -47,6 +47,9 @@ def run_strategy(sector, end, start,
     # current row data
     last_row, val_max, val_min = tools.currentRow(returns)
 
+    # folder's label
+    week_date = str(last_row.name).split(" ")[0]
+
     # Select best and worst ETFs
     selection_ = tools.selection(last_row, n=10)
 
@@ -57,7 +60,7 @@ def run_strategy(sector, end, start,
     # Plot
     plot.heatmap(values=new_array, labels=new_names,
                  max_=val_max, min_=val_min, sector=sector, show=showFig,
-                 path=fig_path)
+                 path=week_date)
 
     return selection_
 
@@ -80,11 +83,14 @@ def run_strategy_sectors(end, start,
     # select last row (current one)
     last_sec_ret, *_ = tools.currentRow(sector_returns)
 
+    # folder's label
+    week_date = str(last_sec_ret.name).split(" ")[0]
+
     # Plot sectors
     plot.plot_bar_sectors(x=last_sec_ret.index,
                           y=(last_sec_ret.values*100).round(2),
                           show=showFig,
-                          path=fig_path)
+                          path=week_date)
 
     # ==================================================================
 

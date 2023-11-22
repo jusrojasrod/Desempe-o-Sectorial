@@ -26,18 +26,13 @@ import plot
 import tools
 
 
-def run_strategy(sector, tickers, fig_path, column_name='Close',
+def run_strategy(sector, end, start,
+                 tickers, fig_path, column_name='Close',
                  showFig=False):
     """
     """
     # 1. Download data
-    end_ = date.today()  # yyyy-mm-dd
-    if end_.day == 31:
-        start_ = datetime(end_.year, end_.month - 1, 30)
-    else:
-        start_ = datetime(end_.year, end_.month - 1, end_.day)
-
-    df = yf.download(tickers, start=start_, end=end_, interval="1wk")
+    df = yf.download(tickers, start=start, end=end, interval="1wk")
 
     # select column_name data
     df = df[column_name]
@@ -79,12 +74,19 @@ if __name__ == "__main__":
     # read data
     ETFs = pd.read_excel(path_rsrc + "ETFs list.xlsx")
 
+    end_ = date.today()  # yyyy-mm-dd
+    if end_.day == 31:
+        start_ = datetime(end_.year, end_.month - 1, 30)
+    else:
+        start_ = datetime(end_.year, end_.month - 1, end_.day)
+
     # execute strategy
     for sector in ETFs.columns:
         print(f"---> {sector}")
-        print(run_strategy(sector=sector,
+        print(run_strategy(sector=sector, end=end_, start=start_,
                            tickers=ETFs[sector].dropna().to_list(),
-                           column_name='Close', fig_path=path_pictures))
+                           column_name='Close',
+                           fig_path=str(start_).split(" ")[0]))
         print("="*100)
 
     # Calculate elapsed time

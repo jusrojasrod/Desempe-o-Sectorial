@@ -20,7 +20,7 @@ import time
 import concurrent.futures
 import threading
 from functools import partial
-from ratelimit import limits, RateLimitException, sleep_and_retry
+from ratelimit import limits, sleep_and_retry
 
 import config
 import utils

@@ -149,6 +149,7 @@ def plot_bar_sectors(x, y, path, show=True):
     # Establecer un tema
     sns.set_style("darkgrid")
 
+    fig, ax = plt.subplots()
     ax = sns.barplot(x=x, y=y, color="r")
     ax.bar_label(ax.containers[0], fontsize=8)
     ax.set_xticklabels(
@@ -162,3 +163,5 @@ def plot_bar_sectors(x, y, path, show=True):
 
     if show is True:
         plt.show()
+
+    plt.close()

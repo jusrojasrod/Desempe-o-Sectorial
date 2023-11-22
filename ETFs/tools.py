@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import numpy as np
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import timedelta, date
 
 
 def currentRow(df):
@@ -76,13 +77,21 @@ def selection(serie, n=10, m_round=2):
     return selected
 
 
-def dates_list(años, start_y, start_m, start_d):
+def dates_list(years=0, months=0, days=0):
     """
-    Generates a period of dates.
+    Generates a list of dates.
     """
-    años = 2
-    semanas = años * 52
+    # 365 days per year
+    years_to_days = years * 365
+    # 30 days per month
+    months_to_days = months * 30
 
-    start = datetime(start_y, start_m, start_d)
+    days = days + years_to_days + months_to_days
 
-    return [start + timedelta(days=7*i) for i in range(semanas)]
+    # boundary dates
+    current_date = date.today()
+    start_date = current_date - timedelta(days=days)
+
+    weeks = int(np.ceil(days * 1/7))
+
+    return [start_date + timedelta(days=7*i) for i in range(weeks)]

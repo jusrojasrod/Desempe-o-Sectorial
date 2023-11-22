@@ -156,7 +156,7 @@ def plot_bar_sectors(x, y, path, show=True):
         labels=x, rotation=90, size=8)
 
     ax.set(xlabel='Sectores', ylabel='Retorno (%)',
-           title='Rendimiento en la última semana de los Sectores')
+           title='Rendimientos')
 
     path = create_dir(path)
     plt.savefig(f"{path}/sectors.png")

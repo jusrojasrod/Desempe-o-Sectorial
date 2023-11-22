@@ -24,6 +24,7 @@ import time
 
 import plot
 import tools
+import sectors
 
 
 def run_strategy(sector, end, start,
@@ -31,6 +32,9 @@ def run_strategy(sector, end, start,
                  showFig=False):
     """
     """
+
+    # ================ Sectorial componets =====================
+
     # 1. Download data
     df = yf.download(tickers, start=start, end=end, interval="1wk")
 
@@ -58,6 +62,33 @@ def run_strategy(sector, end, start,
     return selection_
 
 
+def run_strategy_sectors(end, start,
+                         fig_path, column_name='Close',
+                         showFig=False):
+    # =================== Sectors ==============================
+
+    ETF_sectors = sectors.ETF_sectors
+    tickers = [i for i in ETF_sectors.keys()]
+
+    # Download data
+    sectorsETF = yf.download(tickers, start=start, end=end, interval="1wk")
+    sectors_df = sectorsETF[column_name]
+
+    # Returns
+    sector_returns = sectors_df.pct_change()
+
+    # select last row (current one)
+    last_sec_ret, *_ = tools.currentRow(sector_returns)
+
+    # Plot sectors
+    plot.plot_bar_sectors(x=last_sec_ret.index,
+                          y=(last_sec_ret.values*100).round(2),
+                          show=showFig,
+                          path=fig_path)
+
+    # ==================================================================
+
+
 if __name__ == "__main__":
 
     # Start timer
@@ -80,7 +111,7 @@ if __name__ == "__main__":
     else:
         start_ = datetime(end_.year, end_.month - 1, end_.day)
 
-    # execute strategy
+    # Strategy [component sectors]
     for sector in ETFs.columns:
         print(f"---> {sector}")
         print(run_strategy(sector=sector, end=end_, start=start_,
@@ -88,6 +119,12 @@ if __name__ == "__main__":
                            column_name='Close',
                            fig_path=str(start_).split(" ")[0]))
         print("="*100)
+
+    # Strategy for sectors itself
+    run_strategy_sectors(end=end_, start=start_,
+                         column_name='Close',
+                         showFig=False,
+                         fig_path=str(start_).split(" ")[0])
 
     # Calculate elapsed time
     elapsed_time = time.time() - start_time

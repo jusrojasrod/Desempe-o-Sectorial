@@ -20,6 +20,8 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 import seaborn as sns
 
+import tools
+
 
 def matrix_to_plot(serie):
     """
@@ -112,35 +114,11 @@ def heatmap(values, labels, max_, min_, sector, path="figure", show=True):
 
     ax.set_title(f"{sector}\n")
 
-    path = create_dir(path)
+    path = tools.create_dir(existing_directory="Pictures", new_folder=path)
     plt.savefig(f"{path}/{sector}.png")
 
     if show is True:
         plt.show()
-
-
-def create_dir(new_folder):
-    """
-    Parameters
-    ----------
-    new_folder: str
-        New folder's name.
-    """
-    # Parent directory path
-    PARENT_DIR = os.getcwd()
-
-    # Existing Directory
-    directory = f"Pictures/{new_folder}"
-
-    # Path
-    path = os.path.join(PARENT_DIR, directory)
-
-    # Create directory
-    try:
-        os.mkdir(path)
-        return path
-    except OSError:
-        return path
 
 
 def plot_bar_sectors(x, y, path, show=True):
@@ -158,7 +136,7 @@ def plot_bar_sectors(x, y, path, show=True):
     ax.set(xlabel='Sectores', ylabel='Retorno (%)',
            title='Rendimientos')
 
-    path = create_dir(path)
+    path = tools.create_dir(existing_directory="Pictures", new_folder=path)
     plt.savefig(f"{path}/sectors.png")
 
     if show is True:

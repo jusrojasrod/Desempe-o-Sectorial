@@ -109,7 +109,7 @@ if __name__ == "__main__":
     path_results = cwd + folderPath_results
     path_pictures = cwd + pictures
     # read data
-    ETFs = pd.read_excel(path_rsrc + "ETFs list.xlsx")
+    ETFs = pd.read_excel(path_rsrc + "ETF.xlsx")
 
     end_ = date.today()  # yyyy-mm-dd
     if end_.day == 31:

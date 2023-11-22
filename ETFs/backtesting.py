@@ -18,7 +18,7 @@ def backtesting(years=0, months=0, days=0):
     path_rsrc = cwd + folderPath_rsrc
 
     # read data
-    ETFs = pd.read_excel(path_rsrc + "ETFs list.xlsx")
+    ETFs = pd.read_excel(path_rsrc + "ETF.xlsx")
 
     dates = dates_list(years=years, months=months, days=days)
     # Strategy for sectors itself

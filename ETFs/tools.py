@@ -15,6 +15,7 @@
 import numpy as np
 import pandas as pd
 from datetime import timedelta, date
+import os
 
 
 def currentRow(df):
@@ -95,3 +96,27 @@ def dates_list(years=0, months=0, days=0):
     weeks = int(np.ceil(days * 1/7))
 
     return [start_date + timedelta(days=7*i) for i in range(weeks)]
+
+
+def create_dir(existing_directory, new_folder):
+    """
+    Parameters
+    ----------
+    new_folder: str
+        New folder's name.
+    """
+    # Parent directory path
+    PARENT_DIR = os.getcwd()
+
+    # Existing Directory
+    directory = f"{existing_directory}/{new_folder}"
+
+    # Path
+    path = os.path.join(PARENT_DIR, directory)
+
+    # Create directory
+    try:
+        os.mkdir(path)
+        return path
+    except OSError:
+        return path

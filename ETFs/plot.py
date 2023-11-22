@@ -14,6 +14,7 @@
 
 
 # import libraries
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
@@ -58,7 +59,7 @@ def matrix_to_plot(serie):
     return new_names, new_array
 
 
-def heatmap(values, labels, max_, min_, sector, path, show=True):
+def heatmap(values, labels, max_, min_, sector, path="figure", show=True):
     """
     Create a heatmap from a numpy array and two lists of labels
 
@@ -111,10 +112,35 @@ def heatmap(values, labels, max_, min_, sector, path, show=True):
 
     ax.set_title(f"{sector}\n")
 
+    path = create_dir(path)
     plt.savefig(f"{path}/{sector}.png")
 
     if show is True:
         plt.show()
+
+
+def create_dir(new_folder):
+    """
+    Parameters
+    ----------
+    new_folder: str
+        New folder's name.
+    """
+    # Parent directory path
+    PARENT_DIR = os.getcwd()
+
+    # Existing Directory
+    directory = f"Pictures/{new_folder}"
+
+    # Path
+    path = os.path.join(PARENT_DIR, directory)
+
+    # Create directory
+    try:
+        os.mkdir(path)
+        return path
+    except OSError:
+        return path
 
 
 def plot_bar_sectors(x, y, path, show=True):

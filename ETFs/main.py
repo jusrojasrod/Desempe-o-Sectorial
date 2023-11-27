@@ -135,7 +135,7 @@ if __name__ == "__main__":
         print(f"---> {sector}")
         print(run_strategy(sector=sector, end=end_, start=start_,
                            tickers=ETFs[sector].dropna().to_list(),
-                           figure=False,
+                           figure=True,
                            column_name='Close',
                            fig_path=str(start_).split(" ")[0]))
         print("="*100)
@@ -144,7 +144,7 @@ if __name__ == "__main__":
     run_strategy_sectors(end=end_, start=start_,
                          column_name='Close',
                          showFig=False,
-                         figure=False,
+                         figure=True,
                          fig_path=str(start_).split(" ")[0])
 
     # Calculate elapsed time

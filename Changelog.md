@@ -1,4 +1,4 @@
-# Cange Log
+# Change Log
 
 ## 0.0.1
-- start date was fixed.
+- "Start" date variable was fixed.

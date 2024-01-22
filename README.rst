@@ -13,7 +13,8 @@ Check ETF's behaviour from two sides:
 ======
 
 Download or clone the repository and run the script named main.py. Results are stored within the 
-folder named Pictures under the name "year-month-day" (is a folder as well).
+folder named Pictures under the name "year-month-day" (is a folder as well, this correspondes to the date 
+when the data is download).
 
 
 

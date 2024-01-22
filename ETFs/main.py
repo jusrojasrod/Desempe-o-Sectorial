@@ -20,6 +20,7 @@ import yfinance as yf
 
 from datetime import date
 from datetime import datetime
+from datetime import timedelta
 import time
 
 import plot
@@ -124,11 +125,13 @@ if __name__ == "__main__":
     # read data
     ETFs = pd.read_excel(path_rsrc + "ETF.xlsx")
 
+    delta = timedelta(days=15)
     end_ = date.today()  # yyyy-mm-dd
-    if end_.day == 31:
-        start_ = datetime(end_.year, end_.month - 1, 30)
-    else:
-        start_ = datetime(end_.year, end_.month - 1, end_.day)
+    start_ = end_ - delta
+    # if end_.day == 31:
+    #     start_ = datetime(end_.year, end_.month - 1, 30)
+    # else:
+    #     start_ = datetime(end_.year, end_.month - 1, end_.day)
 
     # Strategy [component sectors]
     for sector in ETFs.columns:

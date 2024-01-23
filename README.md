@@ -13,8 +13,10 @@ Download or clone the repository and run the script named main.py. Results are s
 folder named "Pictures" under the name "year-month-day" (is a folder as well, this correspondes 
 to the date when the data is download).
 
-
-
+```python
+# run program
+python3 main.py
+```
 # Visualize ETFs returns by sector.
 
 

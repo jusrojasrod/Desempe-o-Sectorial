@@ -19,11 +19,8 @@ python3 main.py
 ```
 # Visualize ETFs returns by sector.
 
-
-.. image:: https://github.com/jusrojasrod/Desempe-o-Sectorial/blob/main/Pictures/Energy.png?raw=true
-   :alt: Energy Sector
-
 ![Energy.](https://github.com/jusrojasrod/secper/blob/main/Pictures/Energy.png)
+![Sectors.](https://github.com/jusrojasrod/secper/blob/main/Pictures/sectors.png)
 
 # To do:
 

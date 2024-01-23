@@ -24,7 +24,8 @@ python3 main.py
 
 # To do:
 
-.. [#]  Add data folder.
+- [x]  Add data folder.
+- [ ] Connect EODHD API.
 
 # Requirements
 

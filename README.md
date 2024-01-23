@@ -28,4 +28,7 @@ to the date when the data is download).
 # Requirements
 
 - pandas>=1.5.3
-- 
+- numpy>=1.24.3
+- yfinance==0.2.36
+- seaborn==0.12.2
+- matplotlib==3.7.1

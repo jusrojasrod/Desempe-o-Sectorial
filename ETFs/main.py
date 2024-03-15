@@ -114,7 +114,7 @@ if __name__ == "__main__":
     # Start timer
     start_time = time.time()
 
-    # setup
+    # ------| setup
     folderPath_rsrc = '/ETFs/Resources/'
     folderPath_results = '/ETFs/results/'
     pictures = '/Pictures/'
@@ -122,18 +122,19 @@ if __name__ == "__main__":
     path_rsrc = cwd + folderPath_rsrc
     path_results = cwd + folderPath_results
     path_pictures = cwd + pictures
-    # read data
+    # ------| read data
     ETFs = pd.read_excel(path_rsrc + "ETF.xlsx")
 
     delta = timedelta(days=15)
-    end_ = date.today()  # yyyy-mm-dd
+    end_ = date.today()
+    end_ = datetime(2024, 3, 1)
     start_ = end_ - delta
     # if end_.day == 31:
     #     start_ = datetime(end_.year, end_.month - 1, 30)
     # else:
     #     start_ = datetime(end_.year, end_.month - 1, end_.day)
 
-    # Strategy [component sectors]
+    # ------| Strategy [component sectors]
     for sector in ETFs.columns:
         print(f"---> {sector}")
         print(run_strategy(sector=sector, end=end_, start=start_,
@@ -143,7 +144,7 @@ if __name__ == "__main__":
                            fig_path=str(start_).split(" ")[0]))
         print("="*100)
 
-    # Strategy for sectors itself
+    # ------| Strategy for sectors itself
     run_strategy_sectors(end=end_, start=start_,
                          column_name='Close',
                          showFig=False,
@@ -152,4 +153,4 @@ if __name__ == "__main__":
 
     # Calculate elapsed time
     elapsed_time = time.time() - start_time
-    print("Elapsed time: ", elapsed_time)
+    print(f"Elapsed time: {elapsed_time:.2f}")

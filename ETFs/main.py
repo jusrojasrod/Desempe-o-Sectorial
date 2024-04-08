@@ -126,8 +126,8 @@ if __name__ == "__main__":
     ETFs = pd.read_excel(path_rsrc + "ETF.xlsx")
 
     delta = timedelta(days=15)
-    end_ = date.today()
-    end_ = datetime(2024, 3, 1)
+    # end_ = date.today()
+    end_ = datetime(2024, 3, 29)
     start_ = end_ - delta
     # if end_.day == 31:
     #     start_ = datetime(end_.year, end_.month - 1, 30)
